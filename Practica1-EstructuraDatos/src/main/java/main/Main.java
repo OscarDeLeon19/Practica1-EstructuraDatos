@@ -52,6 +52,11 @@ public class Main extends javax.swing.JFrame {
 
         botonResultados.setText("Ver Resultados");
         botonResultados.setEnabled(false);
+        botonResultados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonResultadosActionPerformed(evt);
+            }
+        });
 
         menu1.setText("Archivo");
 
@@ -117,7 +122,7 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemImportarActionPerformed
-        botonResultados.setEnabled(true);
+        botonResultados.setEnabled(false);
         File fichero;
         JFileChooser seleccionar = new JFileChooser();
 
@@ -143,6 +148,7 @@ public class Main extends javax.swing.JFrame {
 
     private void itemLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemLimpiarActionPerformed
         areaTexto1.setText(null);
+        botonResultados.setEnabled(false); 
     }//GEN-LAST:event_itemLimpiarActionPerformed
 
     private void botonProcesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonProcesarActionPerformed
@@ -157,8 +163,10 @@ public class Main extends javax.swing.JFrame {
                 numero++;
             }
 
+            Resultados res  = new Resultados(areaTexto1);
+            res.verificarApuestas(apuestas);
             botonResultados.setEnabled(true);
-            
+
             for (int i = 0; i < apuestas.length; i++) {
                 if (apuestas[i].isValidacion() == true) {
                     System.out.println("Nombre: " + apuestas[i].getNombre());
@@ -174,25 +182,30 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botonProcesarActionPerformed
 
+    private void botonResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonResultadosActionPerformed
+        
+    }//GEN-LAST:event_botonResultadosActionPerformed
+
     public String[] obtenerLineas(int numeroLineas, String texto) {
         String[] lineas = new String[numeroLineas];
         int lineasContadas = 0;
         int ultima = 0;
         for (int i = 0; i < texto.length() - 1; i++) {
             if (texto.substring(i, i + 1).equals("\n")) {
-                lineas[lineasContadas] = texto.substring(ultima, i);
-                lineasContadas++;
-                ultima = i + 1;
+                    lineas[lineasContadas] = texto.substring(ultima, i);
+                    lineasContadas++;
+                    ultima = i + 1;
+                
             }
         }
-        lineas[lineasContadas] = texto.substring(ultima, texto.length()-1);
+        lineas[lineasContadas] = texto.substring(ultima, texto.length() - 1);
         return lineas;
     }
 
     public void agregarApuestas(Apuesta[] apuestas, int numero, String linea) {
         Apuesta nuevaApuesta = new Apuesta();
         int[] lugares = new int[10];
-        
+
         try {
             int comas[] = new int[11];
             int x = 0;
@@ -262,4 +275,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu menu1;
     private javax.swing.JMenu menuAcciones;
     // End of variables declaration//GEN-END:variables
+
+
 }
