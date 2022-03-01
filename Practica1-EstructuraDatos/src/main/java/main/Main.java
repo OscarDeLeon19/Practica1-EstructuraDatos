@@ -12,6 +12,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Main extends javax.swing.JFrame {
 
+    Apuesta[] apuestas;
+    
     public Main() {
         initComponents();
         setResizable(false);
@@ -156,26 +158,16 @@ public class Main extends javax.swing.JFrame {
             String texto = areaTexto1.getText();
             int cantidadLineas = contarLineas();
             int numero = 0;
-            Apuesta[] apuestas = new Apuesta[cantidadLineas];
+            apuestas = new Apuesta[cantidadLineas];
             String[] lineas = obtenerLineas(cantidadLineas, texto);
             for (int i = 0; i < lineas.length; i++) {
                 agregarApuestas(apuestas, numero, lineas[i]);
                 numero++;
             }
 
-            Resultados res  = new Resultados(areaTexto1);
-            res.verificarApuestas(apuestas);
+            Verificacion verificacion  = new Verificacion(areaTexto1);
+            verificacion.verificarApuestas(apuestas);
             botonResultados.setEnabled(true);
-
-            for (int i = 0; i < apuestas.length; i++) {
-                if (apuestas[i].isValidacion() == true) {
-                    System.out.println("Nombre: " + apuestas[i].getNombre());
-                    System.out.println("Monto: " + apuestas[i].getMonto());
-                    System.out.println("Orden: " + Arrays.toString(apuestas[i].getOrden()));
-                } else if (apuestas[i].isValidacion() == false) {
-                    System.out.println(apuestas[i].getError());
-                }
-            }
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
@@ -236,7 +228,7 @@ public class Main extends javax.swing.JFrame {
             nuevaApuesta.setValidacion(true);
 
         } catch (Exception e) {
-            nuevaApuesta.setError("Error en la puesta: Datos Faltantes");
+            nuevaApuesta.setError("Datos Faltantes");
             nuevaApuesta.setValidacion(false);
         }
         apuestas[numero] = nuevaApuesta;
