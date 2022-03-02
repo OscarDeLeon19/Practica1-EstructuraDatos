@@ -4,7 +4,7 @@ package apuestas;
 
 public class Apuesta {
    
-    private String nombre;
+    private String nombre = "";
     private double monto;
     private int[] orden;
     private int punteo;
@@ -68,7 +68,9 @@ public class Apuesta {
         this.orden = orden;
     }
     
-    
+    public void aumentarPunteo(int punteo){
+        this.punteo += punteo;
+    }
     
     
 }

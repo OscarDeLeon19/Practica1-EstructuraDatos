@@ -175,7 +175,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_botonProcesarActionPerformed
 
     private void botonResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonResultadosActionPerformed
-           Resultados ventanaResultados = new Resultados();
+           Resultados ventanaResultados = new Resultados(apuestas);
            
     }//GEN-LAST:event_botonResultadosActionPerformed
 

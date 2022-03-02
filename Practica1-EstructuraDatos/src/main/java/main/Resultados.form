@@ -62,10 +62,12 @@
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="botonPunteo" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="botonNombre" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="botonVerResultados" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="botonPunteo" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="botonNombre" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -89,6 +91,7 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -104,6 +107,7 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -117,16 +121,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ordenar por Punteo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonPunteoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botonNombre">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ordenar por Nombre"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonNombreActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botonVerResultados">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ver Resultados"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVerResultadosActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
