@@ -165,7 +165,7 @@ public class Main extends javax.swing.JFrame {
                 numero++;
             }
 
-            Verificacion verificacion  = new Verificacion(areaTexto1);
+            Verificacion verificacion  = new Verificacion();
             verificacion.verificarApuestas(apuestas);
             botonResultados.setEnabled(true);
         } catch (Exception e) {
@@ -175,7 +175,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_botonProcesarActionPerformed
 
     private void botonResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonResultadosActionPerformed
-        
+           Resultados ventanaResultados = new Resultados();
+           
     }//GEN-LAST:event_botonResultadosActionPerformed
 
     public String[] obtenerLineas(int numeroLineas, String texto) {

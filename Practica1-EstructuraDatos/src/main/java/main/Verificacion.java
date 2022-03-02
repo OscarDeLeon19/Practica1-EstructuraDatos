@@ -12,10 +12,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Verificacion {
 
-    JTextArea areaResultados;
-
-    public Verificacion(JTextArea areaResultados) {
-        this.areaResultados = areaResultados;
+    public Verificacion() {
     }
 
     public void verificarApuestas(Apuesta[] apuestas) {

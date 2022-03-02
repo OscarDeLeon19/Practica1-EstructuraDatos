@@ -2,7 +2,7 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -27,7 +27,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="380" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane2" pref="419" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -38,11 +38,13 @@
               <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="botonPunteo" min="-2" pref="146" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-              <Component id="botonNombre" min="-2" pref="146" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+              <Component id="botonVerResultados" min="-2" pref="181" max="-2" attributes="0"/>
+              <EmptySpace pref="147" max="32767" attributes="0"/>
+              <Component id="botonPunteo" min="-2" pref="172" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="botonNombre" min="-2" pref="181" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -63,8 +65,9 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="botonPunteo" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="botonNombre" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="botonVerResultados" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -118,6 +121,11 @@
     <Component class="javax.swing.JButton" name="botonNombre">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ordenar por Nombre"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="botonVerResultados">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ver Resultados"/>
       </Properties>
     </Component>
   </SubComponents>
