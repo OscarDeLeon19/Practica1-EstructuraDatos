@@ -52,11 +52,13 @@ public class Resultados extends javax.swing.JFrame {
 
         areaResultadosCarrera.setColumns(20);
         areaResultadosCarrera.setRows(5);
+        areaResultadosCarrera.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         areaResultadosCarrera.setEnabled(false);
         jScrollPane1.setViewportView(areaResultadosCarrera);
 
         areaResultadosApuestas.setColumns(20);
         areaResultadosApuestas.setRows(5);
+        areaResultadosApuestas.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         areaResultadosApuestas.setEnabled(false);
         jScrollPane2.setViewportView(areaResultadosApuestas);
 
@@ -174,30 +176,22 @@ public class Resultados extends javax.swing.JFrame {
         ordenarPorNombre();
     }//GEN-LAST:event_botonNombreActionPerformed
 
-    public void escribirApuestas() {
-
-        for (int i = apuestas.length - 1; i >= 0; i--) {
-            if (apuestas[i].isValidacion() == true) {
-                String texto = "";
-                texto = apuestas[i].getNombre() + " Punteo: " + apuestas[i].getPunteo();
-                areaResultadosApuestas.append(texto);
-                areaResultadosApuestas.append("\n");
-            }
-        }
-    }
-
     public void ordenarPorNombre() {
         areaResultadosApuestas.setText(null);
+        double pasos = 0;
         for (int i = 0; i < apuestas.length; i++) {
+            pasos++;
             for (int j = 0; j < apuestas.length - 1; j++) {
                 if (apuestas[j].getNombre().compareTo(apuestas[j + 1].getNombre()) > 0) {
                     Apuesta auxiliar;
                     auxiliar = apuestas[j];
                     apuestas[j] = apuestas[j + 1];
                     apuestas[j + 1] = auxiliar;
+                    pasos++;
                 }
             }
-        }
+        }          
+        System.out.println("Pasos Nombre:" + pasos);
         for (int i = 0; i < apuestas.length; i++) {
             if (apuestas[i].isValidacion() == true) {
                 String texto = "";
@@ -209,26 +203,32 @@ public class Resultados extends javax.swing.JFrame {
     }
 
     public void ordenarPorPunteo() {
+        double pasos = 0;
         areaResultadosApuestas.setText(null);
         int posicion;
         Apuesta menor = new Apuesta();
         Apuesta auxiliar = new Apuesta();
 
         for (int i = 0; i < apuestas.length; i++) {
+            pasos++;
             menor = apuestas[i];
             posicion = i;
             for (int j = i + 1; j < apuestas.length; j++) {
+                pasos++;
                 if (apuestas[j].getPunteo() < menor.getPunteo()) {
                     menor = apuestas[j];
                     posicion = j;
+                    pasos++;
                 }
             }
             if (posicion != i) {
+                pasos++;
                 auxiliar = apuestas[i];
                 apuestas[i] = apuestas[posicion];
                 apuestas[posicion] = auxiliar;
             }
         }
+        System.out.println("Pasos: " + pasos);
         for (int i = apuestas.length - 1; i >= 0; i--) {
             if (apuestas[i].isValidacion() == true) {
                 String texto = "";

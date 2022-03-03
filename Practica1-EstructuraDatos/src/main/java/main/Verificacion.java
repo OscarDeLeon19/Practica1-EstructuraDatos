@@ -12,7 +12,17 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Verificacion {
 
+    private int errores;
+    
     public Verificacion() {
+    }
+
+    public int getErrores() {
+        return errores;
+    }
+
+    public void setErrores(int errores) {
+        this.errores = errores;
     }
 
     public void verificarApuestas(Apuesta[] apuestas) {
@@ -25,7 +35,7 @@ public class Verificacion {
     }
 
     public void exportarErrores(Apuesta[] apuestas) {
-        int errores = 0;
+        errores = 0;
         String texto = "";
         for (int i = 0; i < apuestas.length; i++) {
             if (apuestas[i].isValidacion() == false) {
