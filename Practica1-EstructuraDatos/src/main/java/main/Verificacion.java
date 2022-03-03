@@ -9,12 +9,15 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import reportes.Reporte;
 
 public class Verificacion {
 
     private int errores;
-    
-    public Verificacion() {
+    private Reporte reporte;
+
+    public Verificacion(Reporte reporte) {
+        this.reporte = reporte;
     }
 
     public int getErrores() {
@@ -26,11 +29,18 @@ public class Verificacion {
     }
 
     public void verificarApuestas(Apuesta[] apuestas) {
+        double pasos = 0;
+        long startTime = System.currentTimeMillis();
         for (int i = 0; i < apuestas.length; i++) {
+            pasos++;
             if (apuestas[i].isValidacion() == true) {
-                comprobarRepetidos(apuestas[i]);
+                pasos++;
+                comprobarRepetidos(apuestas[i], pasos);
             }
         }
+        long endTime = System.currentTimeMillis();
+        reporte.setTiempoVerificacion(((endTime - startTime) / 1000));
+        reporte.setPasosVerificacion(pasos);
         exportarErrores(apuestas);
     }
 
@@ -92,21 +102,26 @@ public class Verificacion {
         }
     }
 
-    public void comprobarRepetidos(Apuesta apuesta) {
+    public void comprobarRepetidos(Apuesta apuesta, double pasos) {
         int[] orden = apuesta.getOrden();
         boolean repetido = false;
         for (int i = 1; i <= 10; i++) {
+            pasos++;
             int repeticiones = 0;
             for (int j = 0; j < 10; j++) {
+                pasos++;
                 if (orden[j] == i) {
+                    pasos++;
                     repeticiones++;
                 }
             }
             if (repeticiones > 1) {
+                pasos++;
                 repetido = true;
             }
         }
         if (repetido == true) {
+            pasos++;
             apuesta.setValidacion(false);
             apuesta.setError("La apuesta tiene valores repetidos");
         }

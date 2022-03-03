@@ -7,18 +7,17 @@ package main;
 
 import apuestas.Apuesta;
 import javax.swing.JOptionPane;
+import reportes.Reporte;
 
-/**
- *
- * @author oscar
- */
 public class Resultados extends javax.swing.JFrame {
 
-    int[] resultados;
-    Apuesta[] apuestas;
+    private int[] resultados;
+    private Apuesta[] apuestas;
+    private Reporte reporte;
 
-    public Resultados(Apuesta[] apuestas) {
+    public Resultados(Apuesta[] apuestas, Reporte reporte) {
         this.apuestas = apuestas;
+        this.reporte = reporte;
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
@@ -45,6 +44,9 @@ public class Resultados extends javax.swing.JFrame {
         botonPunteo = new javax.swing.JButton();
         botonNombre = new javax.swing.JButton();
         botonVerResultados = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        itemReporte = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -84,6 +86,20 @@ public class Resultados extends javax.swing.JFrame {
                 botonVerResultadosActionPerformed(evt);
             }
         });
+
+        jMenu1.setText("Archivo");
+
+        itemReporte.setText("Reportes");
+        itemReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemReporteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itemReporte);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,12 +150,17 @@ public class Resultados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonVerResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerResultadosActionPerformed
+        double pasos = 0;
+        long startTime = System.currentTimeMillis();
         for (int i = 0; i < 10; i++) {
+            pasos++;
             for (int j = 0; j < apuestas.length; j++) {
-
+                pasos++;
                 if (apuestas[j].isValidacion() == true) {
+                    pasos++;
                     int[] orden = apuestas[j].getOrden();
                     if (resultados[i] == orden[i]) {
+                        pasos++;
                         if (i == 0) {
                             apuestas[j].aumentarPunteo(10);
                         } else if (i == 1) {
@@ -165,6 +186,9 @@ public class Resultados extends javax.swing.JFrame {
                 }
             }
         }
+        long endTime = System.currentTimeMillis();
+        reporte.setTiempoResultados(((endTime - startTime) / 1000));
+        reporte.setPasosResultados(pasos);
         ordenarPorPunteo();
     }//GEN-LAST:event_botonVerResultadosActionPerformed
 
@@ -176,7 +200,12 @@ public class Resultados extends javax.swing.JFrame {
         ordenarPorNombre();
     }//GEN-LAST:event_botonNombreActionPerformed
 
+    private void itemReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemReporteActionPerformed
+        reporte.setVisible(true);
+    }//GEN-LAST:event_itemReporteActionPerformed
+
     public void ordenarPorNombre() {
+        long startTime = System.currentTimeMillis();
         areaResultadosApuestas.setText(null);
         double pasos = 0;
         for (int i = 0; i < apuestas.length; i++) {
@@ -190,8 +219,10 @@ public class Resultados extends javax.swing.JFrame {
                     pasos++;
                 }
             }
-        }          
-        System.out.println("Pasos Nombre:" + pasos);
+        }      
+        long endTime = System.currentTimeMillis();
+        reporte.setTiempoOrdenamientoA(((endTime - startTime) / 1000));
+        reporte.setPasosOrdenamientoA(pasos);
         for (int i = 0; i < apuestas.length; i++) {
             if (apuestas[i].isValidacion() == true) {
                 String texto = "";
@@ -203,6 +234,7 @@ public class Resultados extends javax.swing.JFrame {
     }
 
     public void ordenarPorPunteo() {
+        long startTime = System.currentTimeMillis();
         double pasos = 0;
         areaResultadosApuestas.setText(null);
         int posicion;
@@ -228,7 +260,9 @@ public class Resultados extends javax.swing.JFrame {
                 apuestas[posicion] = auxiliar;
             }
         }
-        System.out.println("Pasos: " + pasos);
+        long endTime = System.currentTimeMillis();
+        reporte.setTiempoOrdenamientoP(((endTime - startTime) / 1000));
+        reporte.setPasosOrdenamientoP(pasos);
         for (int i = apuestas.length - 1; i >= 0; i--) {
             if (apuestas[i].isValidacion() == true) {
                 String texto = "";
@@ -245,8 +279,11 @@ public class Resultados extends javax.swing.JFrame {
     private javax.swing.JButton botonNombre;
     private javax.swing.JButton botonPunteo;
     private javax.swing.JButton botonVerResultados;
+    private javax.swing.JMenuItem itemReporte;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

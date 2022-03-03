@@ -9,11 +9,13 @@ import java.util.Stack;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import reportes.Reporte;
 
 public class Main extends javax.swing.JFrame {
 
     private Apuesta[] apuestas;
-    
+    Reporte reporte = new Reporte();
+
     public Main() {
         initComponents();
         setResizable(false);
@@ -178,7 +180,7 @@ public class Main extends javax.swing.JFrame {
                     numero++;
                 }
 
-                Verificacion verificacion = new Verificacion();
+                Verificacion verificacion = new Verificacion(reporte);
                 verificacion.verificarApuestas(apuestas);
                 botonResultados.setEnabled(true);
             } catch (Exception e) {
@@ -188,8 +190,8 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_botonProcesarActionPerformed
 
     private void botonResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonResultadosActionPerformed
-        
-        Resultados ventanaResultados = new Resultados(apuestas);
+
+        Resultados ventanaResultados = new Resultados(apuestas, reporte);
 
     }//GEN-LAST:event_botonResultadosActionPerformed
 
@@ -197,7 +199,7 @@ public class Main extends javax.swing.JFrame {
         NuevaApuesta nvApuesta = new NuevaApuesta(areaTexto1);
         nvApuesta.setVisible(true);
     }//GEN-LAST:event_itemApuestaActionPerformed
-     
+
     public String[] obtenerLineas(int numeroLineas, String texto) {
         String[] lineas = new String[numeroLineas];
         int lineasContadas = 0;
@@ -217,13 +219,16 @@ public class Main extends javax.swing.JFrame {
     public void agregarApuestas(Apuesta[] apuestas, int numero, String linea) {
         Apuesta nuevaApuesta = new Apuesta();
         int[] lugares = new int[10];
-
+        double pasos = 0;
         try {
+            long startTime = System.currentTimeMillis();
             int comas[] = new int[11];
             int x = 0;
             for (int i = 0; i < linea.length() - 1; i++) {
+                pasos++;
                 int j = i + 1;
                 if (",".equals(linea.substring(i, j))) {
+                    pasos++;
                     comas[x] = i;
                     x++;
                 }
@@ -246,7 +251,10 @@ public class Main extends javax.swing.JFrame {
             nuevaApuesta.setMonto(monto);
             nuevaApuesta.setOrden(lugares);
             nuevaApuesta.setValidacion(true);
-
+            pasos += 10;
+            long endTime = System.currentTimeMillis();
+            reporte.setTiempoIngreso(((endTime - startTime)/1000));
+            reporte.setPasosIngreso(pasos);
         } catch (Exception e) {
             nuevaApuesta.setError("Datos Faltantes");
             nuevaApuesta.setValidacion(false);
