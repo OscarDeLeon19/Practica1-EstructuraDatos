@@ -111,16 +111,48 @@ public class Reporte extends javax.swing.JFrame {
 
     public void actualizarReporte() {
         labelTiempo1.setText("" + tiempoIngreso + " s");
-        labelTiempo2.setText("" + tiempoVerificacion+ " s");
-        labelTiempo3.setText("" + tiempoResultados+ " s");
-        labelTiempo4.setText("" + tiempoOrdenamientoA+ " s");
-        labelTiempo5.setText("" + tiempoOrdenamientoP+ " s");
+        labelTiempo2.setText("" + tiempoVerificacion + " s");
+        labelTiempo3.setText("" + tiempoResultados + " s");
+        labelTiempo4.setText("" + tiempoOrdenamientoA + " s");
+        labelTiempo5.setText("" + tiempoOrdenamientoP + " s");
 
         labelProceso1.setText("" + pasosIngreso);
         labelProceso2.setText("" + pasosVerificacion);
         labelProceso3.setText("" + pasosResultados);
         labelProceso4.setText("" + pasosOrdenamientoA);
         labelProceso5.setText("" + pasosOrdenamientoP);
+
+        double menor = pasosIngreso;
+        double mayor = pasosIngreso;
+
+        if (menor > pasosVerificacion) {
+            menor = pasosVerificacion;
+        }
+        if (menor > pasosResultados) {
+            menor = pasosResultados;
+        }     
+        if (menor > pasosOrdenamientoA) {
+            menor = pasosOrdenamientoA;
+        }     
+        if (menor > pasosOrdenamientoP) {
+            menor = pasosOrdenamientoP;
+        }       
+        
+        if (mayor < pasosVerificacion) {
+            mayor = pasosVerificacion;
+        }
+        if (mayor < pasosResultados) {
+            mayor = pasosResultados;
+        }     
+        if (mayor < pasosOrdenamientoA) {
+            mayor = pasosOrdenamientoA;
+        }     
+        if (mayor < pasosOrdenamientoP) {
+            mayor = pasosOrdenamientoP;
+        }
+        
+        labelMenor.setText("" + menor);
+        labelMayor.setText("" + mayor);
     }
 
     @SuppressWarnings("unchecked")

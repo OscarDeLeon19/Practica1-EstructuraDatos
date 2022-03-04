@@ -49,6 +49,7 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setText("Area de texto para ingresar apuestas");
 
         botonProcesar.setText("Procesar Apuestas");
+        botonProcesar.setEnabled(false);
         botonProcesar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonProcesarActionPerformed(evt);
@@ -154,6 +155,8 @@ public class Main extends javax.swing.JFrame {
                 areaTexto1.append(linea);
                 areaTexto1.append("\n");
             }
+            
+            botonProcesar.setEnabled(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al agregar archivo");
         }
@@ -163,6 +166,7 @@ public class Main extends javax.swing.JFrame {
     private void itemLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemLimpiarActionPerformed
         areaTexto1.setText(null);
         botonResultados.setEnabled(false);
+        botonProcesar.setEnabled(false);
     }//GEN-LAST:event_itemLimpiarActionPerformed
 
     private void botonProcesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonProcesarActionPerformed
@@ -196,7 +200,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_botonResultadosActionPerformed
 
     private void itemApuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemApuestaActionPerformed
-        NuevaApuesta nvApuesta = new NuevaApuesta(areaTexto1);
+        NuevaApuesta nvApuesta = new NuevaApuesta(areaTexto1, botonProcesar);
         nvApuesta.setVisible(true);
     }//GEN-LAST:event_itemApuestaActionPerformed
 

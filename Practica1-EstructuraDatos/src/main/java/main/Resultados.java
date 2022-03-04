@@ -6,7 +6,12 @@
 package main;
 
 import apuestas.Apuesta;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import reportes.Reporte;
 
 public class Resultados extends javax.swing.JFrame {
@@ -47,6 +52,7 @@ public class Resultados extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         itemReporte = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,6 +102,14 @@ public class Resultados extends javax.swing.JFrame {
             }
         });
         jMenu1.add(itemReporte);
+
+        jMenuItem1.setText("Exportar Historial");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
 
@@ -190,6 +204,7 @@ public class Resultados extends javax.swing.JFrame {
         reporte.setTiempoResultados(((endTime - startTime) / 1000));
         reporte.setPasosResultados(pasos);
         ordenarPorPunteo();
+        botonVerResultados.setEnabled(false);
     }//GEN-LAST:event_botonVerResultadosActionPerformed
 
     private void botonPunteoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPunteoActionPerformed
@@ -203,6 +218,52 @@ public class Resultados extends javax.swing.JFrame {
     private void itemReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemReporteActionPerformed
         reporte.setVisible(true);
     }//GEN-LAST:event_itemReporteActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        String texto = areaResultadosApuestas.getText();
+        if (texto.equals("")) {
+            JOptionPane.showMessageDialog(null, "Error al exportar el historial");
+        } else {
+            try {
+
+                FileWriter escribir;
+                PrintWriter linea;
+                JFileChooser seleccionar = new JFileChooser();
+                FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivo de Texto", "txt");
+                seleccionar.setAcceptAllFileFilterUsed(false);
+                seleccionar.addChoosableFileFilter(filtro);
+                File fichero;
+                int Guardar = seleccionar.showDialog(null, "Guardar");
+
+                if (Guardar == JFileChooser.APPROVE_OPTION) {
+                    fichero = seleccionar.getSelectedFile();
+                    if (fichero.exists()) {
+                        int opcion = JOptionPane.showConfirmDialog(null, "Deseas sobrescribir");
+                        if (opcion == JOptionPane.YES_OPTION) {
+                            fichero.createNewFile();
+                            escribir = new FileWriter(fichero, false);
+                            escribir.write(texto);
+                            escribir.close();
+                            JOptionPane.showMessageDialog(null, "Historial guardado");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se guardo el archivo");
+                        }
+                    } else {
+                        fichero.createNewFile();
+                        escribir = new FileWriter(fichero, false);
+                        escribir.write(texto);
+                        escribir.close();
+                        JOptionPane.showMessageDialog(null, "Historial guardado");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al guardar");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error " + e);
+            }
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public void ordenarPorNombre() {
         long startTime = System.currentTimeMillis();
@@ -219,7 +280,7 @@ public class Resultados extends javax.swing.JFrame {
                     pasos++;
                 }
             }
-        }      
+        }
         long endTime = System.currentTimeMillis();
         reporte.setTiempoOrdenamientoA(((endTime - startTime) / 1000));
         reporte.setPasosOrdenamientoA(pasos);
@@ -284,6 +345,7 @@ public class Resultados extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
