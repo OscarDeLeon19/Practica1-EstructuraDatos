@@ -15,19 +15,18 @@ public class Verificacion {
 
     private int errores;
     private Reporte reporte;
-
+    /**
+     * Constructor de la clase verificacion
+     * @param reporte El reporte de apuestas
+     */
     public Verificacion(Reporte reporte) {
         this.reporte = reporte;
     }
-
-    public int getErrores() {
-        return errores;
-    }
-
-    public void setErrores(int errores) {
-        this.errores = errores;
-    }
-
+    
+    /**
+     * Verifica que las apuestas no tengan repetidos
+     * @param apuestas El arreglo de apuestas
+     */
     public void verificarApuestas(Apuesta[] apuestas) {
         double pasos = 0;
         long startTime = System.currentTimeMillis();
@@ -43,7 +42,10 @@ public class Verificacion {
         reporte.setPasosVerificacion(pasos);
         exportarErrores(apuestas);
     }
-
+    /**
+     * Exporta los errores de las apuestas a un archivo de texto
+     * @param apuestas El arreglo de apuestas
+     */
     public void exportarErrores(Apuesta[] apuestas) {
         errores = 0;
         String texto = "";
@@ -54,11 +56,8 @@ public class Verificacion {
             }
         }
         if (errores > 0) {
-
             int opcionExportar = JOptionPane.showConfirmDialog(null, "Desea exportar los errores");
-
             if (opcionExportar == JOptionPane.YES_OPTION) {
-
                 try {
                     FileWriter escribir;
                     PrintWriter linea;
@@ -68,7 +67,6 @@ public class Verificacion {
                     seleccionar.addChoosableFileFilter(filtro);
                     File fichero;
                     int Guardar = seleccionar.showDialog(null, "Guardar");
-
                     if (Guardar == JFileChooser.APPROVE_OPTION) {
                         fichero = seleccionar.getSelectedFile();
                         if (fichero.exists()) {
@@ -89,7 +87,6 @@ public class Verificacion {
                             escribir.close();
                             JOptionPane.showMessageDialog(null, "Reporte de errores Exportado");
                         }
-
                     } else {
                         JOptionPane.showMessageDialog(null, "Error al guardar");
                     }
@@ -101,7 +98,11 @@ public class Verificacion {
             JOptionPane.showMessageDialog(null, "No hay errores para exportar");
         }
     }
-
+    /**
+     * Comprueba que no hayan repetidos en una apuesta
+     * @param apuesta La apuesta
+     * @param pasos Los pasos realizados
+     */
     public void comprobarRepetidos(Apuesta apuesta, double pasos) {
         int[] orden = apuesta.getOrden();
         boolean repetido = false;

@@ -20,6 +20,11 @@ public class Resultados extends javax.swing.JFrame {
     private Apuesta[] apuestas;
     private Reporte reporte;
 
+    /**
+     * Constructor de la clase resultados
+     * @param apuestas La lista de apuestas
+     * @param reporte El reporte de datos de la apuestas
+     */ 
     public Resultados(Apuesta[] apuestas, Reporte reporte) {
         this.apuestas = apuestas;
         this.reporte = reporte;
@@ -29,6 +34,9 @@ public class Resultados extends javax.swing.JFrame {
         iniciar();
     }
 
+    /**
+     * Metodo para abrir la ventana de ingreso de resultados de la carrera
+     */
     public void iniciar() {
         JOptionPane.showMessageDialog(null, "La carrera ha terminado. Ingresa los resultados");
         resultados = new int[10];
@@ -52,7 +60,7 @@ public class Resultados extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         itemReporte = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        itemExportarHistorial = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -103,13 +111,13 @@ public class Resultados extends javax.swing.JFrame {
         });
         jMenu1.add(itemReporte);
 
-        jMenuItem1.setText("Exportar Historial");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        itemExportarHistorial.setText("Exportar Historial");
+        itemExportarHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                itemExportarHistorialActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(itemExportarHistorial);
 
         jMenuBar1.add(jMenu1);
 
@@ -162,7 +170,10 @@ public class Resultados extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Agrega los punteos de las apuestas comprobando con los resultados de la carrera.
+     * @param evt 
+     */
     private void botonVerResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerResultadosActionPerformed
         double pasos = 0;
         long startTime = System.currentTimeMillis();
@@ -206,20 +217,32 @@ public class Resultados extends javax.swing.JFrame {
         ordenarPorPunteo();
         botonVerResultados.setEnabled(false);
     }//GEN-LAST:event_botonVerResultadosActionPerformed
-
+    /**
+     * Llama al metodo para ordenar punteo
+     * @param evt 
+     */
     private void botonPunteoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPunteoActionPerformed
         ordenarPorPunteo();
     }//GEN-LAST:event_botonPunteoActionPerformed
-
+    /**
+     * Llama al metodo para ordenar por nombre
+     * @param evt 
+     */
     private void botonNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNombreActionPerformed
         ordenarPorNombre();
     }//GEN-LAST:event_botonNombreActionPerformed
-
+    /**
+     * Abre la ventana de reporte
+     * @param evt 
+     */
     private void itemReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemReporteActionPerformed
         reporte.setVisible(true);
     }//GEN-LAST:event_itemReporteActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    /**
+     * Exporta los resultados de las apuestas a un archivo de texto.
+     * @param evt 
+     */
+    private void itemExportarHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemExportarHistorialActionPerformed
         String texto = areaResultadosApuestas.getText();
         if (texto.equals("")) {
             JOptionPane.showMessageDialog(null, "Error al exportar el historial");
@@ -263,8 +286,10 @@ public class Resultados extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error " + e);
             }
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+    }//GEN-LAST:event_itemExportarHistorialActionPerformed
+    /**
+     * Ordena los resultados de las apuestas por nombre utilizando el ordenamiento tipo burbuja 
+     */
     public void ordenarPorNombre() {
         long startTime = System.currentTimeMillis();
         areaResultadosApuestas.setText(null);
@@ -293,7 +318,9 @@ public class Resultados extends javax.swing.JFrame {
             }
         }
     }
-
+    /**
+     * Ordena las apuestas por punteo utilizando un ordenamiento de seleccion.
+     */
     public void ordenarPorPunteo() {
         long startTime = System.currentTimeMillis();
         double pasos = 0;
@@ -340,12 +367,12 @@ public class Resultados extends javax.swing.JFrame {
     private javax.swing.JButton botonNombre;
     private javax.swing.JButton botonPunteo;
     private javax.swing.JButton botonVerResultados;
+    private javax.swing.JMenuItem itemExportarHistorial;
     private javax.swing.JMenuItem itemReporte;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

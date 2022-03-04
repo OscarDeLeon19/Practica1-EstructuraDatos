@@ -13,102 +13,167 @@ public class Reporte extends javax.swing.JFrame {
     private long tiempoOrdenamientoA = 0;
     private double pasosOrdenamientoA = 0;
 
+    /**
+     * Constructor de la clase reporte
+     */
     public Reporte() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
     }
-
+    /**
+     * Devuelve el tiempo que paso para el ingreso de una apuesta
+     * @return El tiempo de ingreso
+     */
     public long getTiempoIngreso() {
         return tiempoIngreso;
     }
-
+    /**
+     * Obtiene el tiempo que paso para el ingreso de una apuesta
+     * @param tiempoIngreso El tiempo de ingreso
+     */
     public void setTiempoIngreso(long tiempoIngreso) {
         this.tiempoIngreso = tiempoIngreso;
         actualizarReporte();
     }
-
+    /**
+     * Devuelve los pasos para el ingreso de una apuesta
+     * @return Los pasos de ingreso
+     */
     public double getPasosIngreso() {
         return pasosIngreso;
     }
-
+    /**
+     * Obtiene los pasos para el ingreso de una apuesta
+     * @param pasosIngreso Los pasos de ingreso
+     */
     public void setPasosIngreso(double pasosIngreso) {
         this.pasosIngreso = pasosIngreso;
         actualizarReporte();
     }
-
+    /**
+     * Devuelve el tiempo que paso para la verificacion de una apuesta
+     * @return El tiempo de verificacion
+     */
     public long getTiempoVerificacion() {
         return tiempoVerificacion;
     }
-
+    /**
+     * Obtiene el tiempo que paso para la verificacion de una apuesta
+     * @param tiempoVerificacion El tiempo de verificacion
+     */
     public void setTiempoVerificacion(long tiempoVerificacion) {
         this.tiempoVerificacion = tiempoVerificacion;
         actualizarReporte();
     }
-
+    /**
+     * Devuelve los pasos para la verificacion de una apuesta
+     * @return Los pasos de verificacion
+     */
     public double getPasosVerificacion() {
         return pasosVerificacion;
     }
-
+    /**
+     * Obtiene los pasos para la verificacion de una apuesta
+     * @param pasosVerificacion Los pasos de verificacion
+     */
     public void setPasosVerificacion(double pasosVerificacion) {
         this.pasosVerificacion = pasosVerificacion;
         actualizarReporte();
     }
-
+    /**
+     * Devuelve el tiempo que paso para los agregar los resultados
+     * @return El tiempo de los resultados
+     */
     public long getTiempoResultados() {
         return tiempoResultados;
     }
-
+    /**
+     * Obtiene el tiempo que paso para los agregar los resultados
+     * @param tiempoResultados El tiempo de los resultados
+     */
     public void setTiempoResultados(long tiempoResultados) {
         this.tiempoResultados = tiempoResultados;
         actualizarReporte();
     }
-
+    /**
+     * Devuelve los pasos para agregar los resultados
+     * @return Los pasos de los resultados
+     */
     public double getPasosResultados() {
         return pasosResultados;
     }
-
+    /**
+     * Obtiene los pasos para agregar los resultados
+     * @param pasosResultados Los pasos de los resultados
+     */
     public void setPasosResultados(double pasosResultados) {
         this.pasosResultados = pasosResultados;
         actualizarReporte();
     }
-
+    /**
+     * Develve el tiempo que paso para ordenar las apuestas por punteo
+     * @return El tiempo para ordenar por punteo
+     */
     public long getTiempoOrdenamientoP() {
         return tiempoOrdenamientoP;
     }
-
+    /**
+     * Obtiene el tiempo que paso para ordenar las apuestas por punteo
+     * @param tiempoOrdenamientoN El tiempo para ordenar por punteo
+     */
     public void setTiempoOrdenamientoP(long tiempoOrdenamientoN) {
         this.tiempoOrdenamientoP = tiempoOrdenamientoN;
         actualizarReporte();
     }
-
+    /**
+     * Devuelve los pasos para el ordenamiento por punteo de las apuestas
+     * @return Los pasos para ordenar por punteo
+     */
     public double getPasosOrdenamientoP() {
         return pasosOrdenamientoP;
     }
-
+    /**
+     * Obtiene los pasos para el ordenamiento por punteo de las apuestas
+     * @param pasosOrdenamientoN Los pasos para ordenar por punteo
+     */
     public void setPasosOrdenamientoP(double pasosOrdenamientoN) {
         this.pasosOrdenamientoP = pasosOrdenamientoN;
         actualizarReporte();
     }
-
+    /**
+     * Devuelve el tiempo que pasa para ordenar alfabeticamente las apuestas
+     * @return El tiempo de ordenamiento por nombre
+     */
     public long getTiempoOrdenamientoA() {
         return tiempoOrdenamientoA;
     }
-
+    /**
+     * Obtiene el tiempo que pasa para ordenar alfabeticamente las apuestas
+     * @param tiempoOrdenamientoA El tiempo de ordenamiento por nombre
+     */
     public void setTiempoOrdenamientoA(long tiempoOrdenamientoA) {
         this.tiempoOrdenamientoA = tiempoOrdenamientoA;
         actualizarReporte();
     }
-
+    /**
+     * Devuelve los pasos para ordenar alfabeticamente
+     * @return La cantidad de pasos
+     */
     public double getPasosOrdenamientoA() {
         return pasosOrdenamientoA;
     }
-
+    /**
+     * Obtiene los pasos para ordenar alfabeticamente
+     * @param pasosOrdenamientoA La cantidad de pasos
+     */
     public void setPasosOrdenamientoA(double pasosOrdenamientoA) {
         this.pasosOrdenamientoA = pasosOrdenamientoA;
         actualizarReporte();
     }
-
+    /**
+     * Agrega los tiempos y pasos a la tabla de reportes
+     */
     public void actualizarReporte() {
         labelTiempo1.setText("" + tiempoIngreso + " s");
         labelTiempo2.setText("" + tiempoVerificacion + " s");

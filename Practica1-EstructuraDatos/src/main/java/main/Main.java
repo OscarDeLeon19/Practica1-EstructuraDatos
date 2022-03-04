@@ -16,6 +16,9 @@ public class Main extends javax.swing.JFrame {
     private Apuesta[] apuestas;
     Reporte reporte = new Reporte();
 
+    /**
+     * Contructor de la clase Main
+     */
     public Main() {
         initComponents();
         setResizable(false);
@@ -135,7 +138,11 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Boton para importar un documento de texto a la aplicacion
+     *
+     * @param evt
+     */
     private void itemImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemImportarActionPerformed
         botonResultados.setEnabled(false);
         File fichero;
@@ -155,20 +162,29 @@ public class Main extends javax.swing.JFrame {
                 areaTexto1.append(linea);
                 areaTexto1.append("\n");
             }
-            
+
             botonProcesar.setEnabled(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al agregar archivo");
         }
 
     }//GEN-LAST:event_itemImportarActionPerformed
-
+    /**
+     * Limpia el area de texto de la donde se ingresan las apuestas
+     *
+     * @param evt
+     */
     private void itemLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemLimpiarActionPerformed
         areaTexto1.setText(null);
         botonResultados.setEnabled(false);
         botonProcesar.setEnabled(false);
     }//GEN-LAST:event_itemLimpiarActionPerformed
-
+    /**
+     * Agrega las apuestas validas al arreglo de apuetas y las manda a
+     * verificacion
+     *
+     * @param evt
+     */
     private void botonProcesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonProcesarActionPerformed
         if (areaTexto1.equals("")) {
             JOptionPane.showMessageDialog(null, "No haz ingresado apuestas");
@@ -192,18 +208,27 @@ public class Main extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_botonProcesarActionPerformed
-
+    /**
+     * Crea el Jframe para visualizar los resultados.
+     * @param evt 
+     */
     private void botonResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonResultadosActionPerformed
-
         Resultados ventanaResultados = new Resultados(apuestas, reporte);
-
     }//GEN-LAST:event_botonResultadosActionPerformed
-
+    /**
+     * Crea la ventana para agregar una nueva apuesta manualmente
+     * @param evt 
+     */
     private void itemApuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemApuestaActionPerformed
         NuevaApuesta nvApuesta = new NuevaApuesta(areaTexto1, botonProcesar);
         nvApuesta.setVisible(true);
     }//GEN-LAST:event_itemApuestaActionPerformed
-
+    /**
+     * Obtiene las lineas de el JTextArea de ingreso de apuestas
+     * @param numeroLineas El numero de lineas
+     * @param texto El texto del area de texto
+     * @return 
+     */
     public String[] obtenerLineas(int numeroLineas, String texto) {
         String[] lineas = new String[numeroLineas];
         int lineasContadas = 0;
@@ -219,7 +244,12 @@ public class Main extends javax.swing.JFrame {
         lineas[lineasContadas] = texto.substring(ultima, texto.length() - 1);
         return lineas;
     }
-
+    /**
+     * Obtiene los datos de una linea y agrega a una nueva apuesta
+     * @param apuestas La lista de apuestas
+     * @param numero El numero de apuesta que corresponde
+     * @param linea La linea de donde se obtienen los datos.
+     */
     public void agregarApuestas(Apuesta[] apuestas, int numero, String linea) {
         Apuesta nuevaApuesta = new Apuesta();
         int[] lugares = new int[10];
@@ -237,7 +267,6 @@ public class Main extends javax.swing.JFrame {
                     x++;
                 }
             }
-
             String nombre = linea.substring(1, comas[0] - 1);
             double monto = Double.parseDouble(linea.substring(comas[0] + 2, comas[1] - 1));
             lugares[0] = Integer.parseInt(linea.substring(comas[1] + 2, comas[2] - 1));
@@ -257,7 +286,7 @@ public class Main extends javax.swing.JFrame {
             nuevaApuesta.setValidacion(true);
             pasos += 10;
             long endTime = System.currentTimeMillis();
-            reporte.setTiempoIngreso(((endTime - startTime)/1000));
+            reporte.setTiempoIngreso(((endTime - startTime) / 1000));
             reporte.setPasosIngreso(pasos);
         } catch (Exception e) {
             nuevaApuesta.setError("Datos Faltantes");
@@ -265,7 +294,10 @@ public class Main extends javax.swing.JFrame {
         }
         apuestas[numero] = nuevaApuesta;
     }
-
+    /**
+     * Cuenta cuantas lineas tiene ocupadas el area de texto
+     * @return La cantidad de lineas
+     */
     public int contarLineas() {
         int linea = 0;
         String texto = areaTexto1.getText();
@@ -277,7 +309,10 @@ public class Main extends javax.swing.JFrame {
         linea++;
         return linea;
     }
-
+    /**
+     * Inicia el probrama
+     * @param args 
+     */
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {

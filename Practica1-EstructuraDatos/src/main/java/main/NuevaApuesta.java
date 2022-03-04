@@ -6,9 +6,13 @@ import javax.swing.JTextArea;
 
 public class NuevaApuesta extends javax.swing.JFrame {
     
-    JTextArea areaApuestas;
-    JButton botonProcesar;
-    
+    private JTextArea areaApuestas;
+    private JButton botonProcesar;
+    /**
+     * Constructor de la clase NuevaApuesta
+     * @param areaApuestas El area de texto donde las apuestas se ingresan
+     * @param botonProcesar El boton para procesar dichas apuestas
+     */
     public NuevaApuesta(JTextArea areaApuestas, JButton botonProcesar) {
         this.areaApuestas = areaApuestas;
         this.botonProcesar = botonProcesar;
@@ -115,7 +119,10 @@ public class NuevaApuesta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Obtiene los datos del Frame y los guarda en una nueva linea.
+     * @param evt 
+     */
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
         
         try {
@@ -152,8 +159,6 @@ public class NuevaApuesta extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Apuesta invalida");
         }
-        
-
     }//GEN-LAST:event_botonAgregarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
