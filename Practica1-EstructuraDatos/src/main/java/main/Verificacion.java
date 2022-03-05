@@ -34,7 +34,7 @@ public class Verificacion {
             pasos++;
             if (apuestas[i].isValidacion() == true) {
                 pasos++;
-                comprobarRepetidos(apuestas[i], pasos);
+                pasos += comprobarRepetidos(apuestas[i]);
             }
         }
         long endTime = System.currentTimeMillis();
@@ -101,31 +101,33 @@ public class Verificacion {
     /**
      * Comprueba que no hayan repetidos en una apuesta
      * @param apuesta La apuesta
-     * @param pasos Los pasos realizados
+     * @param nuevos_pasos Los pasos realizados
      */
-    public void comprobarRepetidos(Apuesta apuesta, double pasos) {
+    public double comprobarRepetidos(Apuesta apuesta) {
+        double nuevos_pasos = 0;
         int[] orden = apuesta.getOrden();
         boolean repetido = false;
         for (int i = 1; i <= 10; i++) {
-            pasos++;
             int repeticiones = 0;
+            nuevos_pasos++;
             for (int j = 0; j < 10; j++) {
-                pasos++;
+                nuevos_pasos++;
                 if (orden[j] == i) {
-                    pasos++;
+                    nuevos_pasos++;
                     repeticiones++;
                 }
             }
             if (repeticiones > 1) {
-                pasos++;
+                nuevos_pasos++;
                 repetido = true;
             }
         }
         if (repetido == true) {
-            pasos++;
+            nuevos_pasos++;
             apuesta.setValidacion(false);
             apuesta.setError("La apuesta tiene valores repetidos");
         }
+        return nuevos_pasos;
     }
 
 }
