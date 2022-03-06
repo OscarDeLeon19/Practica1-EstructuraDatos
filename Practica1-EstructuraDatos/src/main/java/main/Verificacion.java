@@ -15,35 +15,43 @@ public class Verificacion {
 
     private int errores;
     private Reporte reporte;
+
     /**
      * Constructor de la clase verificacion
+     *
      * @param reporte El reporte de apuestas
      */
     public Verificacion(Reporte reporte) {
         this.reporte = reporte;
     }
-    
+
     /**
      * Verifica que las apuestas no tengan repetidos
+     *
      * @param apuestas El arreglo de apuestas
      */
     public void verificarApuestas(Apuesta[] apuestas) {
-        double pasos = 0;
+        double[] pasos = new double[apuestas.length];
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < apuestas.length; i++) {
-            pasos++;
             if (apuestas[i].isValidacion() == true) {
-                pasos++;
-                pasos += comprobarRepetidos(apuestas[i]);
+                pasos[i] = comprobarRepetidos(apuestas[i]);
             }
         }
         long endTime = System.currentTimeMillis();
+        int promedio = 0;
+        for (int i = 0; i < apuestas.length; i++) {
+            promedio += pasos[i];
+        }
+        promedio = promedio/apuestas.length;
         reporte.setTiempoVerificacion(((endTime - startTime) / 1000));
-        reporte.setPasosVerificacion(pasos);
+        reporte.setPasosVerificacion(promedio);
         exportarErrores(apuestas);
     }
+
     /**
      * Exporta los errores de las apuestas a un archivo de texto
+     *
      * @param apuestas El arreglo de apuestas
      */
     public void exportarErrores(Apuesta[] apuestas) {
@@ -98,13 +106,16 @@ public class Verificacion {
             JOptionPane.showMessageDialog(null, "No hay errores para exportar");
         }
     }
+
     /**
      * Comprueba que no hayan repetidos en una apuesta
+     *
      * @param apuesta La apuesta
      * @param nuevos_pasos Los pasos realizados
      */
     public double comprobarRepetidos(Apuesta apuesta) {
         double nuevos_pasos = 0;
+
         int[] orden = apuesta.getOrden();
         boolean repetido = false;
         for (int i = 1; i <= 10; i++) {
@@ -115,18 +126,23 @@ public class Verificacion {
                 if (orden[j] == i) {
                     nuevos_pasos++;
                     repeticiones++;
+                    j = 10;
                 }
             }
             if (repeticiones > 1) {
                 nuevos_pasos++;
                 repetido = true;
             }
+            if (repeticiones == 0) {
+                repetido = true;
+            }
         }
         if (repetido == true) {
             nuevos_pasos++;
             apuesta.setValidacion(false);
-            apuesta.setError("La apuesta tiene valores repetidos");
+            apuesta.setError("La apuesta tiene valores repetidos y falta un valor");
         }
+        System.out.println("Pasos: " + nuevos_pasos);
         return nuevos_pasos;
     }
 
